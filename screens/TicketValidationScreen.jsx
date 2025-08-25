@@ -48,11 +48,20 @@ export default function TelaValidacaoTicket() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
   titulo: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
   card: {
-    width: "100%", backgroundColor: "#fff", padding: 15, borderRadius: 10,
-    marginBottom: 20, elevation: 3,
+    width: "100%",
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    elevation: 3,
   },
   texto: { fontSize: 16, marginVertical: 5 },
 });

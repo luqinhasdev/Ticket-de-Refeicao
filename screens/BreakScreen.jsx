@@ -3,11 +3,11 @@
 // Mostra o tempo restante para o intervalo começar ou acabar.
 // Usar Date para comparação com horário atual.
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const BreakScreen = () => {
   const [isBreakActive, setIsBreakActive] = useState(false);
-  const [remainingTime, setRemainingTime] = useState('');
+  const [remainingTime, setRemainingTime] = useState("");
 
   const breakStartTime = new Date(); // Replace with actual break start time
   const breakEndTime = new Date(); // Replace with actual break end time
@@ -22,7 +22,9 @@ const BreakScreen = () => {
       } else {
         setIsBreakActive(false);
         const timeUntilStart = Math.floor((breakStartTime - now) / 1000);
-        setRemainingTime(`${Math.floor(timeUntilStart / 60)}m ${timeUntilStart % 60}s`);
+        setRemainingTime(
+          `${Math.floor(timeUntilStart / 60)}m ${timeUntilStart % 60}s`
+        );
       }
     }, 1000);
 
@@ -31,8 +33,11 @@ const BreakScreen = () => {
 
   return (
     <div>
-      <h1>{isBreakActive ? 'Intervalo Ativo' : 'Intervalo Inativo'}</h1>
-      <p>{isBreakActive ? 'Tempo restante:' : 'Tempo até o início:'} {remainingTime}</p>
+      <h1>{isBreakActive ? "Intervalo Ativo" : "Intervalo Inativo"}</h1>
+      <p>
+        {isBreakActive ? "Tempo restante:" : "Tempo até o início:"}{" "}
+        {remainingTime}
+      </p>
     </div>
   );
 };

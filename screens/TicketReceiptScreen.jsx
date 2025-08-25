@@ -26,7 +26,10 @@ export default function TelaRecebimentoTicket() {
 
   const receberTicket = () => {
     if (!naEscola) {
-      Alert.alert("Atenção", "Você precisa estar na escola para receber o ticket!");
+      Alert.alert(
+        "Atenção",
+        "Você precisa estar na escola para receber o ticket!"
+      );
       return;
     }
     if (statusTicket !== "Nenhum") {
@@ -34,7 +37,10 @@ export default function TelaRecebimentoTicket() {
       return;
     }
     if (!dentroDoHorario()) {
-      Alert.alert("Atenção", "O botão só funciona nos 5 minutos antes do intervalo!");
+      Alert.alert(
+        "Atenção",
+        "O botão só funciona nos 5 minutos antes do intervalo!"
+      );
       return;
     }
     setStatusTicket("Disponível");
@@ -44,7 +50,9 @@ export default function TelaRecebimentoTicket() {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Recebimento de Ticket</Text>
-      <Text style={styles.texto}>Hora atual: {horaAtual.toLocaleTimeString()}</Text>
+      <Text style={styles.texto}>
+        Hora atual: {horaAtual.toLocaleTimeString()}
+      </Text>
       <Text style={styles.texto}>Status: {statusTicket}</Text>
 
       <Button
@@ -60,7 +68,12 @@ export default function TelaRecebimentoTicket() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
   titulo: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
   texto: { fontSize: 16, marginVertical: 10 },
 });

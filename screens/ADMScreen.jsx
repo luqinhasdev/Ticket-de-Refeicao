@@ -4,12 +4,12 @@
 // (Opcional) Histórico de uso dos tickets (por data).
 // Botão para "resetar" os tickets no fim do dia.
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ADMScreen = () => {
   const [students, setStudents] = useState([]);
-  const [name, setName] = useState('');
-  const [registration, setRegistration] = useState('');
+  const [name, setName] = useState("");
+  const [registration, setRegistration] = useState("");
   const [ticketHistory, setTicketHistory] = useState([]);
   const [ticketsToday, setTicketsToday] = useState([]);
 
@@ -17,8 +17,8 @@ const ADMScreen = () => {
     if (name && registration) {
       const newStudent = { name, registration };
       setStudents([...students, newStudent]);
-      setName('');
-      setRegistration('');
+      setName("");
+      setRegistration("");
     }
   };
 
@@ -29,7 +29,10 @@ const ADMScreen = () => {
   };
 
   const handleResetTickets = () => {
-    setTicketHistory([...ticketHistory, { date: new Date().toLocaleDateString(), tickets: ticketsToday }]);
+    setTicketHistory([
+      ...ticketHistory,
+      { date: new Date().toLocaleDateString(), tickets: ticketsToday },
+    ]);
     setTicketsToday([]);
   };
 
@@ -62,7 +65,9 @@ const ADMScreen = () => {
           {students.map((student, index) => (
             <li key={index}>
               {student.name} ({student.registration})
-              <button onClick={() => handleGiveTicket(student)}>Give Ticket</button>
+              <button onClick={() => handleGiveTicket(student)}>
+                Give Ticket
+              </button>
             </li>
           ))}
         </ul>
@@ -86,7 +91,7 @@ const ADMScreen = () => {
         <ul>
           {ticketHistory.map((entry, index) => (
             <li key={index}>
-              {entry.date}: {entry.tickets.map((s) => s.name).join(', ')}
+              {entry.date}: {entry.tickets.map((s) => s.name).join(", ")}
             </li>
           ))}
         </ul>
