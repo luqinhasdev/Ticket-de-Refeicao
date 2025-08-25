@@ -4,27 +4,24 @@
 // Deve simular se o aluno está dentro da "região permitida" (ex: botão que representa estar na escola).
 // Após receber o ticket, o status muda para "Ticket disponível".
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, Alert, StyleSheet } from "react-native";
+import { TicketContext } from "./TicketContext";
 
 export default function TelaRecebimentoTicket() {
+  const { statusTicket, setStatusTicket } = useContext(TicketContext);
   const [horaAtual, setHoraAtual] = useState(new Date());
-  const [ticketRecebido, setTicketRecebido] = useState(false);
   const [naEscola, setNaEscola] = useState(false);
 
-  // Atualiza a hora a cada 1s
   useEffect(() => {
-    const intervalo = setInterval(() => {
-      setHoraAtual(new Date());
-    }, 1000);
+    const intervalo = setInterval(() => setHoraAtual(new Date()), 1000);
     return () => clearInterval(intervalo);
   }, []);
 
-  // Simulação: intervalo é às 10h, e só pode receber entre 09:55 e 10:00
   const dentroDoHorario = () => {
     const h = horaAtual.getHours();
     const m = horaAtual.getMinutes();
-    return h === 9 && m >= 55 && m <= 59;
+    return h === 9 && m >= 55 && m <= 59; // intervalo simulado 10h
   };
 
   const receberTicket = () => {
@@ -32,7 +29,7 @@ export default function TelaRecebimentoTicket() {
       Alert.alert("Atenção", "Você precisa estar na escola para receber o ticket!");
       return;
     }
-    if (ticketRecebido) {
+    if (statusTicket !== "Nenhum") {
       Alert.alert("Ops", "Você já recebeu seu ticket hoje.");
       return;
     }
@@ -40,7 +37,7 @@ export default function TelaRecebimentoTicket() {
       Alert.alert("Atenção", "O botão só funciona nos 5 minutos antes do intervalo!");
       return;
     }
-    setTicketRecebido(true);
+    setStatusTicket("Disponível");
     Alert.alert("Sucesso", "Ticket disponível!");
   };
 
@@ -48,14 +45,14 @@ export default function TelaRecebimentoTicket() {
     <View style={styles.container}>
       <Text style={styles.titulo}>Recebimento de Ticket</Text>
       <Text style={styles.texto}>Hora atual: {horaAtual.toLocaleTimeString()}</Text>
-      <Text style={styles.texto}>
-        Status: {ticketRecebido ? "🎟️ Ticket disponível" : "Nenhum ticket"}
-      </Text>
+      <Text style={styles.texto}>Status: {statusTicket}</Text>
+
       <Button
         title={naEscola ? "Sair da Escola" : "Entrar na Escola"}
         onPress={() => setNaEscola(!naEscola)}
       />
-      {dentroDoHorario() && !ticketRecebido && (
+
+      {dentroDoHorario() && statusTicket === "Nenhum" && (
         <Button title="Receber Ticket" onPress={receberTicket} />
       )}
     </View>
@@ -63,20 +60,7 @@ export default function TelaRecebimentoTicket() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f4f4f4",
-    padding: 20,
-  },
-  titulo: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  texto: {
-    fontSize: 16,
-    marginVertical: 10,
-  },
+  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  titulo: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
+  texto: { fontSize: 16, marginVertical: 10 },
 });
