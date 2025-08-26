@@ -28,6 +28,7 @@ export default function LoginScreen() {
         "user",
         JSON.stringify({ tipo: "aluno", ...aluno })
       );
+      // Navega para a tela "Location" após o login do aluno
       navigation.navigate("Location");
     } else {
       Alert.alert("Erro", "Matrícula inválida");
@@ -43,7 +44,8 @@ export default function LoginScreen() {
         "user",
         JSON.stringify({ tipo: "admin", usuario: matricula })
       );
-      navigation.navigate("Admin");
+      // Navega para a tela "ADM" após o login do administrador
+      navigation.navigate("ADM");
     } else {
       Alert.alert("Erro", "Usuário ou senha incorretos");
     }
