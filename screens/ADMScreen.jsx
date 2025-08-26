@@ -4,6 +4,8 @@
 // (Opcional) Histórico de uso dos tickets (por data).
 // Botão para "resetar" os tickets no fim do dia.
 
+
+//vou comecar a trabalhar de verdade agora, me deseje sorte
 import React, { useState } from "react";
 
 const ADMScreen = () => {
